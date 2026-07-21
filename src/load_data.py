@@ -6,7 +6,9 @@ print("Shape:")
 print(df.shape)
 print()
 print("Columns:")
-print(df.columns.tolist())
+print(df.columns.tolist(
+    
+))
 print()
 print("First Five rows:")
 print(df.head())
