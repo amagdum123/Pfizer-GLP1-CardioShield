@@ -1,0 +1,13 @@
+#virtual environment
+venv/
+#python cache
+__pycache__/
+*.pyc
+#macOS files
+.DS_Store
+#jupyter
+.ipynb_checkpoints/
+#model files
+*.pkl
+#environment variables
+.env
