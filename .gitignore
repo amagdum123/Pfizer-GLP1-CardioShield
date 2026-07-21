@@ -13,9 +13,9 @@ __pycache__/
 .env
 # Large datasets
 data/*.csv
-#,odels
+#models
 *.pk
 #conda installer
 Miniconda3-latest-MacOSX-arm64.sh
-#results/images
-results/
+# results
+results/*.csv

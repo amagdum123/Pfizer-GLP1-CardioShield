@@ -14,8 +14,7 @@ from rdkit.Chem import (
 )
 
 
-MODEL_PATH = "models/random_forest_tuned_herg.pkl"
-
+MODEL_PATH = "models/random_forest_combined_herg.pkl"
 
 def calculate_features(smiles):
 

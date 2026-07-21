@@ -15,8 +15,13 @@ from rdkit.Chem import (
 from rdkit.Chem.Draw import rdMolDraw2D
 
 
-MODEL_PATH = "models/random_forest_combined_herg.pkl"
+import os
 
+MODEL_PATH = os.path.join(
+    os.path.dirname(os.path.dirname(__file__)),
+    "models",
+    "random_forest_combined_herg.pkl"
+)
 
 
 def calculate_features(smiles):
