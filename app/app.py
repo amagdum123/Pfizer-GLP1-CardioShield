@@ -9,12 +9,6 @@ import matplotlib.pyplot as plt
 
 from src.pipeline import explain_prediction, create_image
 
-
-# =====================================================
-# Logo
-# =====================================================
-
-# CardioShield.png sits one level up from this file (app/app.py -> ../CardioShield.png)
 LOGO_PATH = os.path.join(
     os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
     "CardioShield.png",
@@ -44,9 +38,6 @@ st.set_page_config(
 )
 
 
-# =====================================================
-# Pfizer-Inspired Research Dashboard Styling
-# =====================================================
 
 st.markdown(
     """
@@ -202,9 +193,6 @@ st.markdown(
 )
 
 
-# =====================================================
-# Research Header
-# =====================================================
 
 logo_html = (
     f'<img src="data:image/png;base64,{logo_b64}" style="height:56px; margin-right:18px;">'
@@ -232,9 +220,6 @@ st.markdown(
 )
 
 
-# =====================================================
-# Model Information Banner
-# =====================================================
 
 def metric_box(label: str, value: str) -> str:
     return f"""
@@ -260,10 +245,6 @@ with col3:
 st.divider()
 
 
-# =====================================================
-# Molecule Input
-# =====================================================
-
 st.subheader("Compound Input")
 
 st.markdown(
@@ -276,7 +257,6 @@ smiles = st.text_input(
     placeholder="Enter molecular SMILES...",
 )
 
-# Known reference compounds spanning a range of hERG liability, for quick testing
 EXAMPLE_COMPOUNDS = {
     "Terfenadine (high liability)": "CC(C)(C)c1ccc(C(O)CCCN2CCC(C(O)(c3ccccc3)c3ccccc3)CC2)cc1",
     "Sotalol (moderate liability)": "CC(C)NCC(O)c1ccc(NS(C)(=O)=O)cc1",
@@ -289,12 +269,6 @@ with st.expander("Example compounds"):
         st.markdown(f"**{name}**")
         st.code(smi)
 
-
-# =====================================================
-# Risk Assessment Execution
-# =====================================================
-
-# Feature-name lookup used both in the results table and the SHAP chart
 FEATURE_NAME_MAP = {
     "logP": "Lipophilicity (logP)",
     "molecular_weight": "Molecular Weight",
@@ -316,10 +290,6 @@ if st.button("Evaluate Compound", type="primary"):
         probability, top_features, bit_info, mol = explain_prediction(smiles)
         risk_percent = probability * 100
 
-        # ---------------------------------------------
-        # Risk Classification
-        # ---------------------------------------------
-
         if risk_percent < 20:
             risk_label = "Low Predicted Liability"
             risk_color = "#2E7D32"
@@ -330,9 +300,6 @@ if st.button("Evaluate Compound", type="primary"):
             risk_label = "High Predicted Liability"
             risk_color = "#B3261E"
 
-        # ---------------------------------------------
-        # Assessment Summary
-        # ---------------------------------------------
 
         st.subheader("Compound Assessment")
 
@@ -373,9 +340,6 @@ if st.button("Evaluate Compound", type="primary"):
 
         st.divider()
 
-        # ---------------------------------------------
-        # Molecular Analysis
-        # ---------------------------------------------
 
         st.subheader("Structural Analysis")
 
@@ -431,9 +395,6 @@ if st.button("Evaluate Compound", type="primary"):
 
         st.divider()
 
-        # ---------------------------------------------
-        # Explainability
-        # ---------------------------------------------
 
         st.subheader("Model Explainability")
 
@@ -457,9 +418,6 @@ if st.button("Evaluate Compound", type="primary"):
 
         st.divider()
 
-        # ---------------------------------------------
-        # Interpretation
-        # ---------------------------------------------
 
         st.subheader("Scientific Interpretation")
 
@@ -511,10 +469,6 @@ if st.button("Evaluate Compound", type="primary"):
     except Exception as e:
         st.error(f"Unable to analyze compound: {e}")
 
-
-# =====================================================
-# Footer
-# =====================================================
 
 st.divider()
 
