@@ -1,7 +1,7 @@
 import base64
 import os
 import sys
-
+from PIL import Image
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 import streamlit as st
