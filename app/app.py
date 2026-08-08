@@ -1,13 +1,11 @@
 import base64
 import os
 import sys
-import tempfile
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 import streamlit as st
 import matplotlib.pyplot as plt
-from PIL import Image
 
 from src.pipeline import explain_prediction, create_image
 
@@ -396,15 +394,16 @@ if st.button("Evaluate Compound", type="primary"):
                 unsafe_allow_html=True,
             )
 
-            img_bytes = create_image(mol, bit_info, top_features)
+            image = create_image(
+                mol,
+                bit_info,
+                top_features
+            )
 
-            with tempfile.NamedTemporaryFile(delete=False, suffix=".png") as tmp:
-                tmp.write(img_bytes)
-                tmp_path = tmp.name
-
-            image = Image.open(tmp_path)
-            st.image(image, use_container_width=True)
-            os.unlink(tmp_path)
+            st.image(
+                image,
+                use_container_width=True
+            )
 
         with right:
             st.markdown(
