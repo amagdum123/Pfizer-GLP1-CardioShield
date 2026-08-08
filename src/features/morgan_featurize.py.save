@@ -1,0 +1,53 @@
+from rdkit.Chem import rdFingerprintGeneratorimport pandas as pd
+from rdkit import Chem
+from rdkit.Chem import AllChem
+
+
+# Load dataset
+df = pd.read_csv("data/herg.csv")
+
+print("Loaded dataset:")
+print(df.head())
+
+
+def smiles_to_fp(smiles):
+    mol = Chem.MolFromSmiles(smiles)
+
+    if mol is None:
+        return None
+
+    fp = AllChem.GetMorganFingerprintAsBitVect(
+        mol,
+        radius=2,
+        nBits=2048
+    )
+
+    return list(fp)
+
+
+# Generate fingerprints
+fingerprints = []
+
+for smiles in df["SMILES"]:
+    fingerprints.append(smiles_to_fp(smiles))
+
+
+fp_df = pd.DataFrame(fingerprints)
+
+# Add label
+fp_df["Y"] = df["Y"]
+
+
+print("\nFingerprint dataset:")
+print(fp_df.head())
+
+print("\nShape:")
+print(fp_df.shape)
+
+
+fp_df.to_csv(
+    "data/herg_morgan_features.csv",
+    index=False
+)
+
+print("\nSaved Morgan fingerprints!")
